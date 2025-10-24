@@ -5,7 +5,7 @@ import { Sidebar } from './Sidebar'
 import { StoreProvider } from '@/contexts/StoreContext'
 import { AdminDataProvider } from '@/contexts/AdminDataContext'
 import { AIReportNotification } from '@/components/Dashboard/AIReportNotification'
-import { Footer } from '@/components/layout/Footer'
+import { Footer } from '@/components/Layout/Footer'
 
 export const MainLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)

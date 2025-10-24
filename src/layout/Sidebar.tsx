@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/contexts/AuthContext'
-import { PermissionGuard } from '@/components/auth/PermissionGuard'
+import { PermissionGuard } from '@/components/Auth/PermissionGuard'
 
 interface SidebarProps {
   isOpen: boolean

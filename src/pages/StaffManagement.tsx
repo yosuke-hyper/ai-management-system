@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { PermissionGuard } from '@/components/auth/PermissionGuard'
+import { PermissionGuard } from '@/components/Auth/PermissionGuard'
 import { supabase } from '@/lib/supabase'
 import { Users, Mail, Shield, Store, ChevronDown, ChevronUp } from 'lucide-react'
 
