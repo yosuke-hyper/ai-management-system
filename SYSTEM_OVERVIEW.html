@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>システム全体概要ドキュメント - AI Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #2563eb;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #1e40af;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #1e3a8a;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #374151;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            font-size: 0.9em;
+            color: #e11d48;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: "Courier New", monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #f3f4f6;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-primary {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-info {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .toc {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: #1f2937;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: 5px;
+        }
+
+        .toc a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .meta-info {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .meta-info strong {
+            display: inline-block;
+            width: 150px;
+            color: #1f2937;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 40px 0;
+        }
+
+        .flow-diagram {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+            line-height: 2;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>システム全体概要ドキュメント</h1>
+
+        <div class="meta-info">
+            <p><strong>プロジェクト名:</strong> AI Management System</p>
+            <p><strong>バージョン:</strong> 0.0.0</p>
+            <p><strong>タイプ:</strong> 飲食チェーン向け経営管理システム（マルチテナント対応）</p>
+            <p><strong>ディレクトリパス:</strong> <code>/tmp/cc-agent/57978924/project</code></p>
+        </div>
+
+        <div class="toc">
+            <h3>目次</h3>
+            <ul>
+                <li><a href="#tech-stack">1. 技術スタック</a></li>
+                <li><a href="#project-structure">2. プロジェクト構造</a></li>
+                <li><a href="#features">3. 主要機能</a></li>
+                <li><a href="#database">4. データベース設計</a></li>
+                <li><a href="#edge-functions">5. Supabase Edge Functions</a></li>
+                <li><a href="#env-vars">6. 環境変数</a></li>
+                <li><a href="#routing">7. ルーティング構造</a></li>
+                <li><a href="#deployment">8. 開発・ビルド・デプロイ</a></li>
+                <li><a href="#data-flow">9. データフロー</a></li>
+                <li><a href="#state-management">10. 状態管理</a></li>
+                <li><a href="#security">11. セキュリティ対策</a></li>
+                <li><a href="#performance">12. パフォーマンス最適化</a></li>
+                <li><a href="#testing">13. テスト戦略</a></li>
+                <li><a href="#roadmap">14. 今後の拡張計画</a></li>
+                <li><a href="#troubleshooting">15. トラブルシューティング</a></li>
+                <li><a href="#monitoring">16. 監視・メトリクス</a></li>
+                <li><a href="#license">17. ライセンス・利用規約</a></li>
+                <li><a href="#contact">18. 連絡先・サポート</a></li>
+                <li><a href="#changelog">19. 変更履歴</a></li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 id="tech-stack">1. 技術スタック</h2>
+
+        <h3>フロントエンド</h3>
+        <ul>
+            <li><strong>React</strong> 18.3.1 - UIフレームワーク</li>
+            <li><strong>TypeScript</strong> 5.5.3 - 型安全な開発</li>
+            <li><strong>Vite</strong> 5.4.2 - 高速ビルドツール</li>
+            <li><strong>React Router DOM</strong> 6.28.0 - クライアントサイドルーティング</li>
+            <li><strong>Tailwind CSS</strong> 3.4.1 - ユーティリティファーストCSS</li>
+        </ul>
+
+        <h3>UI・デザイン</h3>
+        <ul>
+            <li><strong>Radix UI</strong> - アクセシブルなUIコンポーネント (Dropdown Menu, Progress, Slot, Tabs)</li>
+            <li><strong>Lucide React</strong> 0.544.0 - アイコンライブラリ</li>
+            <li><strong>Class Variance Authority</strong> - 条件付きスタイリング</li>
+            <li><strong>clsx / tailwind-merge</strong> - クラス名結合</li>
+        </ul>
+
+        <h3>データ可視化</h3>
+        <ul>
+            <li><strong>Chart.js</strong> 4.5.0 + <strong>react-chartjs-2</strong> 5.3.0</li>
+            <li><strong>Recharts</strong> 3.2.0</li>
+            <li><strong>TanStack React Table</strong> 8.20.5 - 高機能テーブル</li>
+        </ul>
+
+        <h3>バックエンド・インフラ</h3>
+        <ul>
+            <li><strong>Supabase</strong> - BaaS (Backend as a Service)
+                <ul>
+                    <li>認証 (Email/Password)</li>
+                    <li>PostgreSQL データベース</li>
+                    <li>Row Level Security (RLS)</li>
+                    <li>Edge Functions (Deno)</li>
+                    <li>リアルタイム機能</li>
+                </ul>
+            </li>
+            <li><strong>Supabase Client</strong> 2.39.3</li>
+        </ul>
+
+        <h3>外部API連携</h3>
+        <ul>
+            <li><strong>OpenAI API</strong> - AI分析レポート生成、チャット機能</li>
+            <li><strong>Google Sheets API</strong> - データ同期・エクスポート</li>
+            <li><strong>LINE Messaging API</strong> - LINE Bot（未実装）</li>
+        </ul>
+
+        <h3>ユーティリティ</h3>
+        <ul>
+            <li><strong>date-fns</strong> 4.1.0 - 日付操作</li>
+            <li><strong>Terser</strong> 5.44.0 - コード圧縮</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="project-structure">2. プロジェクト構造</h2>
+
+        <pre><code>project/
+├── src/                          # フロントエンドソースコード
+│   ├── components/               # UIコンポーネント (68ファイル)
+│   │   ├── Admin/               # 管理者機能
+│   │   ├── Auth/                # 認証UI
+│   │   ├── Charts/              # グラフコンポーネント
+│   │   ├── Chat/                # AIチャット
+│   │   ├── Dashboard/           # ダッシュボード
+│   │   ├── Organization/        # 組織管理
+│   │   ├── Reports/             # レポート管理
+│   │   └── ...
+│   ├── contexts/                # React Context (4ファイル)
+│   ├── hooks/                   # カスタムフック (10ファイル)
+│   ├── pages/                   # ページコンポーネント (14ファイル)
+│   ├── services/                # ビジネスロジック・API (8ファイル)
+│   └── types/                   # TypeScript型定義
+│
+├── supabase/                    # Supabaseバックエンド
+│   ├── functions/               # Edge Functions (5個)
+│   └── migrations/              # マイグレーション (53ファイル, 7,254行)
+│
+└── ドキュメント/ (16ファイル)</code></pre>
+
+        <div class="info-box">
+            <strong>統計:</strong>
+            <ul>
+                <li>TypeScript/TSXファイル: 122個</li>
+                <li>Supabaseマイグレーション: 53ファイル (7,254行)</li>
+                <li>Edge Functions: 5個</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 id="features">3. 主要機能</h2>
+
+        <h3>3.1 認証・権限管理</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> Supabase Auth による Email/Password 認証</li>
+            <li><span class="badge badge-success">✓</span> マルチテナント対応（組織ごとに完全データ分離）</li>
+            <li><span class="badge badge-success">✓</span> 役割ベース権限管理
+                <ul>
+                    <li><code>Owner</code>: 組織オーナー (全権限)</li>
+                    <li><code>Admin</code>: 管理者 (メンバー管理、設定変更)</li>
+                    <li><code>Manager</code>: 店長 (店舗データ管理)</li>
+                    <li><code>Staff</code>: スタッフ (日報入力のみ)</li>
+                </ul>
+            </li>
+            <li><span class="badge badge-success">✓</span> Row Level Security (RLS) による自動データフィルタリング</li>
+        </ul>
+
+        <h3>3.2 店舗・組織管理</h3>
+        <ul>
+            <li>マルチストア対応（複数店舗管理）</li>
+            <li>組織管理（組織情報設定、メンバー招待・削除、サブスクリプションプラン管理）</li>
+            <li>店舗管理（店舗登録・編集・削除、店長アサイン、店舗別権限設定）</li>
+        </ul>
+
+        <h3>3.3 日報・レポート管理</h3>
+        <ul>
+            <li>日次報告入力（売上、仕入れ、各種経費、テキスト報告）</li>
+            <li>売上詳細（現金/クレジット、税率別）</li>
+            <li>仕入先別入力</li>
+            <li>月次経費入力</li>
+        </ul>
+
+        <h3>3.4 ダッシュボード・分析</h3>
+        <ul>
+            <li>3つの期間別ダッシュボード（日次・週次・月次）</li>
+            <li>KPI表示（売上高、粗利益・粗利率、営業利益・営業利益率、原価率、人件費率、目標達成率）</li>
+            <li>グラフ・チャート
+                <ul>
+                    <li>売上推移（棒グラフ）</li>
+                    <li>経費比率（円グラフ）</li>
+                    <li>利益ウォーターフォール</li>
+                    <li>カレンダーヒートマップ</li>
+                </ul>
+            </li>
+            <li>店舗比較機能</li>
+        </ul>
+
+        <h3>3.5 目標管理</h3>
+        <ul>
+            <li>月次目標設定（目標売上、目標利益、目標利益率、目標原価率、目標人件費率）</li>
+            <li>日次目標設定</li>
+            <li>目標達成状況の可視化</li>
+        </ul>
+
+        <h3>3.6 AI機能</h3>
+        <ul>
+            <li><span class="badge badge-primary">AI</span> AIチャット（店舗データに基づく質問応答、過去のチャット履歴保存、使用量制限管理）</li>
+            <li><span class="badge badge-primary">AI</span> AI分析レポート自動生成（週次・月次レポート、スケジュール設定、レポート共有機能、メール送信）</li>
+            <li>AI使用量管理（組織ごとの月次制限、使用量トラッキング、使用量警告・制限）</li>
+        </ul>
+
+        <h3>3.7 Google Sheets連携</h3>
+        <ul>
+            <li>データ同期（日報データのGoogle Sheets出力、リアルタイム同期設定）</li>
+            <li>双方向連携（Sheets → DB インポート、DB → Sheets エクスポート）</li>
+        </ul>
+
+        <h3>3.8 監査・セキュリティ</h3>
+        <ul>
+            <li>監査ログ（全ての重要操作をログ記録）</li>
+            <li>利用規約・プライバシーポリシー（利用規約同意管理、同意履歴トラッキング）</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="database">4. データベース設計</h2>
+
+        <h3>4.1 主要テーブル (27個)</h3>
+
+        <h4>組織・ユーザー管理</h4>
+        <ol>
+            <li><code>organizations</code> - 組織情報</li>
+            <li><code>organization_members</code> - 組織メンバー関連</li>
+            <li><code>profiles</code> - ユーザープロファイル</li>
+            <li><code>organization_invitations</code> - 組織招待</li>
+        </ol>
+
+        <h4>店舗管理</h4>
+        <ol start="5">
+            <li><code>stores</code> - 店舗マスタ</li>
+            <li><code>store_assignments</code> - ユーザー・店舗アサイン</li>
+            <li><code>vendors</code> - 仕入先マスタ</li>
+            <li><code>store_vendor_assignments</code> - 店舗・仕入先関連</li>
+        </ol>
+
+        <h4>レポート・データ</h4>
+        <ol start="9">
+            <li><code>daily_reports</code> - 日報</li>
+            <li><code>daily_report_vendor_purchases</code> - 日報仕入先別データ</li>
+            <li><code>monthly_expenses</code> - 月次経費</li>
+            <li><code>summary_data</code> - サマリーデータ</li>
+        </ol>
+
+        <h4>目標管理</h4>
+        <ol start="13">
+            <li><code>targets</code> - 月次目標</li>
+            <li><code>daily_targets</code> - 日次目標</li>
+            <li><code>expense_baselines</code> - 経費ベースライン</li>
+        </ol>
+
+        <h4>AI機能</h4>
+        <ol start="16">
+            <li><code>ai_conversations</code> - AIチャット会話</li>
+            <li><code>ai_messages</code> - AIメッセージ</li>
+            <li><code>ai_generated_reports</code> - AI生成レポート</li>
+            <li><code>report_schedules</code> - レポートスケジュール</li>
+            <li><code>ai_usage_settings</code> - AI使用量設定</li>
+            <li><code>ai_usage_tracking</code> - AI使用量トラッキング</li>
+            <li><code>report_generation_logs</code> - レポート生成ログ</li>
+        </ol>
+
+        <h4>システム</h4>
+        <ol start="23">
+            <li><code>audit_logs</code> - 監査ログ</li>
+            <li><code>terms_acceptance</code> - 利用規約同意</li>
+        </ol>
+
+        <h3>4.2 セキュリティ (RLS)</h3>
+
+        <div class="success-box">
+            <strong>全テーブルでRow Level Security有効化</strong>
+            <ul>
+                <li>組織間完全データ分離（<code>organization_id</code> による自動フィルタリング）</li>
+                <li>役割ベースアクセス制御（SELECT/INSERT/UPDATE/DELETE ポリシー個別定義）</li>
+                <li>セキュアデフォルト設計（デフォルトで全アクセス拒否、必要な権限のみ許可）</li>
+            </ul>
+        </div>
+
+        <h3>4.3 ヘルパー関数</h3>
+        <pre><code>-- ユーザーの組織ID取得
+get_user_organization_id() -> uuid
+
+-- 組織オーナー判定
+is_organization_owner(org_id uuid) -> boolean
+
+-- 組織管理者判定
+is_organization_admin(org_id uuid) -> boolean
+
+-- 管理者権限判定 (profiles.role)
+is_admin() -> boolean</code></pre>
+
+        <hr>
+
+        <h2 id="edge-functions">5. Supabase Edge Functions</h2>
+
+        <h3>5.1 chat-gpt</h3>
+        <ul>
+            <li><strong>機能:</strong> ChatGPT APIとの統合</li>
+            <li><strong>エンドポイント:</strong> <code>/functions/v1/chat-gpt</code></li>
+            <li><strong>入力:</strong> ユーザーメッセージ、会話履歴</li>
+            <li><strong>出力:</strong> AI応答</li>
+            <li><strong>認証:</strong> 必要 (JWT検証)</li>
+        </ul>
+
+        <h3>5.2 generate-ai-report</h3>
+        <ul>
+            <li><strong>機能:</strong> AI分析レポート自動生成</li>
+            <li><strong>エンドポイント:</strong> <code>/functions/v1/generate-ai-report</code></li>
+            <li><strong>処理:</strong>
+                <ol>
+                    <li>データベースから該当期間のデータ取得</li>
+                    <li>OpenAI API でレポート生成</li>
+                    <li><code>ai_generated_reports</code> に保存</li>
+                </ol>
+            </li>
+        </ul>
+
+        <h3>5.3 scheduled-report-generator</h3>
+        <ul>
+            <li><strong>機能:</strong> スケジュール設定に基づくレポート自動生成</li>
+            <li><strong>トリガー:</strong> Cron (Supabase Scheduler)</li>
+        </ul>
+
+        <h3>5.4 send-report-email</h3>
+        <ul>
+            <li><strong>機能:</strong> 生成されたレポートのメール送信</li>
+            <li><strong>エンドポイント:</strong> <code>/functions/v1/send-report-email</code></li>
+        </ul>
+
+        <h3>5.5 sync-to-sheets</h3>
+        <ul>
+            <li><strong>機能:</strong> データをGoogle Sheetsに同期</li>
+            <li><strong>エンドポイント:</strong> <code>/functions/v1/sync-to-sheets</code></li>
+        </ul>
+
+        <div class="info-box">
+            <strong>共通仕様:</strong>
+            <ul>
+                <li>CORS対応: 全てのEdge Functionで必須ヘッダー設定</li>
+                <li>エラーハンドリング: try-catchでラップ</li>
+                <li>環境変数: 自動注入 (SUPABASE_URL, SUPABASE_ANON_KEY等)</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 id="env-vars">6. 環境変数</h2>
+
+        <h3>開発環境 (.env)</h3>
+        <pre><code># Supabase
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+
+# モード切り替え
+VITE_USE_SUPABASE=false  # false=デモモード、true=本番モード
+
+# OpenAI (Edge Functions用、フロントエンド不要)
+OPENAI_API_KEY=sk-...
+
+# Google Sheets (オプション)
+VITE_GOOGLE_SHEETS_API_KEY=your-api-key
+VITE_GOOGLE_SHEET_ID=your-sheet-id
+
+# LINE Bot (未実装)
+LINE_CHANNEL_SECRET=your-secret
+LINE_CHANNEL_ACCESS_TOKEN=your-token</code></pre>
+
+        <div class="warning-box">
+            <strong>セキュリティ注意:</strong>
+            <ul>
+                <li>サービスロールキーは <strong>絶対にフロントエンドに含めない</strong></li>
+                <li>Edge Functions内でのみ使用</li>
+                <li><code>.env</code> ファイルは <code>.gitignore</code> に含める</li>
+            </ul>
+        </div>
+
+        <h3>環境変数一覧</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>変数名</th>
+                    <th>必須</th>
+                    <th>説明</th>
+                    <th>例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>VITE_SUPABASE_URL</code></td>
+                    <td>✅</td>
+                    <td>Supabase プロジェクトURL</td>
+                    <td><code>https://xxx.supabase.co</code></td>
+                </tr>
+                <tr>
+                    <td><code>VITE_SUPABASE_ANON_KEY</code></td>
+                    <td>✅</td>
+                    <td>Supabase 匿名キー</td>
+                    <td><code>eyJhbGciOi...</code></td>
+                </tr>
+                <tr>
+                    <td><code>VITE_USE_SUPABASE</code></td>
+                    <td>✅</td>
+                    <td>本番/デモモード</td>
+                    <td><code>true</code> / <code>false</code></td>
+                </tr>
+                <tr>
+                    <td><code>OPENAI_API_KEY</code></td>
+                    <td>🔶</td>
+                    <td>OpenAI APIキー (Edge Functions)</td>
+                    <td><code>sk-proj-...</code></td>
+                </tr>
+                <tr>
+                    <td><code>VITE_GOOGLE_SHEETS_API_KEY</code></td>
+                    <td>⚪</td>
+                    <td>Google Sheets APIキー</td>
+                    <td><code>AIza...</code></td>
+                </tr>
+            </tbody>
+        </table>
+        <p><small>✅ 必須 / 🔶 AI機能に必須 / ⚪ オプション</small></p>
+
+        <hr>
+
+        <h2 id="routing">7. ルーティング構造</h2>
+
+        <h3>公開ページ (認証不要)</h3>
+        <ul>
+            <li><code>/login</code> - ログインページ</li>
+            <li><code>/share/report/:shareToken</code> - 共有レポート</li>
+            <li><code>/invite/:token</code> - 組織招待受諾</li>
+            <li><code>/terms</code> - 利用規約</li>
+            <li><code>/privacy</code> - プライバシーポリシー</li>
+        </ul>
+
+        <h3>認証済みページ (AuthGate)</h3>
+        <ul>
+            <li><code>/dashboard/daily</code> - 日次ダッシュボード</li>
+            <li><code>/dashboard/weekly</code> - 週次ダッシュボード</li>
+            <li><code>/dashboard/monthly</code> - 月次ダッシュボード</li>
+            <li><code>/targets</code> - 目標設定</li>
+            <li><code>/chat</code> - AIチャット</li>
+            <li><code>/ai-reports</code> - AI分析レポート一覧</li>
+            <li><code>/report/new</code> - 新規日報作成</li>
+            <li><code>/expenses/monthly</code> - 月次経費入力</li>
+            <li><code>/staff</code> - スタッフ管理 (管理者のみ)</li>
+            <li><code>/admin</code> - 管理者設定 (管理者のみ)</li>
+            <li><code>/organization</code> - 組織設定 (Owner/Adminのみ)</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="deployment">8. 開発・ビルド・デプロイ</h2>
+
+        <h3>開発コマンド</h3>
+        <pre><code># 依存関係インストール
+npm install
+
+# 開発サーバー起動 (ポート5173)
+npm run dev
+
+# 本番ビルド
+npm run build
+
+# ビルド結果をプレビュー
+npm run preview</code></pre>
+
+        <h3>ビルド設定</h3>
+        <ul>
+            <li><strong>バンドラー:</strong> Vite</li>
+            <li><strong>コード圧縮:</strong> Terser (console.log除去)</li>
+            <li><strong>コード分割:</strong>
+                <ul>
+                    <li><code>react-vendor</code> (React, React DOM, React Router)</li>
+                    <li><code>chart-vendor</code> (Chart.js, Recharts)</li>
+                    <li><code>ui-vendor</code> (Radix UI, Lucide React)</li>
+                </ul>
+            </li>
+            <li><strong>警告閾値:</strong> 1000KB</li>
+        </ul>
+
+        <h3>デプロイ方法</h3>
+
+        <h4>1. Netlify (推奨)</h4>
+        <pre><code># netlify.toml 設定済み
+# GitHub連携で自動デプロイ</code></pre>
+
+        <h4>2. Vercel</h4>
+        <pre><code># vercel.json 設定済み
+# Vercel CLI または GitHub連携
+vercel --prod</code></pre>
+
+        <hr>
+
+        <h2 id="data-flow">9. データフロー</h2>
+
+        <h3>9.1 日報入力フロー</h3>
+        <div class="flow-diagram">
+[スタッフ] → ReportForm.tsx<br>
+    ↓<br>
+[データ検証] → TypeScript型チェック<br>
+    ↓<br>
+[Supabase Insert] → daily_reports テーブル<br>
+    ↓ (RLS自動フィルタ: organization_id)<br>
+[保存成功] → ダッシュボードに反映<br>
+    ↓<br>
+[オプション] → Google Sheets同期 (sync-to-sheets)
+        </div>
+
+        <h3>9.2 AIチャットフロー</h3>
+        <div class="flow-diagram">
+[ユーザー] → AIChatPage.tsx → AIChat.tsx<br>
+    ↓<br>
+[使用量チェック] → useAIUsageLimit.ts<br>
+    ↓ (制限OK)<br>
+[Edge Function] → chat-gpt (Supabase Function)<br>
+    ↓<br>
+[OpenAI API] → ChatGPT-4 (gpt-4-turbo)<br>
+    ↓<br>
+[応答取得] → ai_messages テーブルに保存<br>
+    ↓<br>
+[UI更新] → チャット画面に表示<br>
+    ↓<br>
+[使用量記録] → ai_usage_tracking に記録
+        </div>
+
+        <hr>
+
+        <h2 id="state-management">10. 状態管理</h2>
+
+        <h3>10.1 React Context</h3>
+        <ol>
+            <li><strong>AuthContext</strong> - 認証状態管理、ユーザー情報、ログイン/ログアウト</li>
+            <li><strong>OrganizationContext</strong> - 現在の組織情報、組織メンバー一覧、組織切り替え</li>
+            <li><strong>StoreContext</strong> - 現在選択中の店舗、ユーザーがアクセス可能な店舗一覧</li>
+            <li><strong>AdminDataContext</strong> - 管理者用データキャッシュ、店舗一覧、ユーザー一覧等</li>
+        </ol>
+
+        <h3>10.2 カスタムフック</h3>
+        <ul>
+            <li><code>useAIReports</code> - AI生成レポート管理</li>
+            <li><code>useAIUsageLimit</code> - AI使用量制限チェック</li>
+            <li><code>useChatArchive</code> - チャット履歴管理</li>
+            <li><code>useDailyTarget</code> - 日次目標取得・更新</li>
+            <li><code>useExpenseBaseline</code> - 経費ベースライン</li>
+            <li><code>useKpis</code> - KPI計算</li>
+            <li><code>useReports</code> - 日報データ取得</li>
+            <li><code>useStores</code> - 店舗データ管理</li>
+            <li><code>useTargets</code> - 目標データ管理</li>
+            <li><code>useUsageLimits</code> - 使用量制限管理</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="security">11. セキュリティ対策</h2>
+
+        <h3>11.1 認証・認可</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> Supabase Auth (Email/Password)</li>
+            <li><span class="badge badge-success">✓</span> JWT トークンベース認証</li>
+            <li><span class="badge badge-success">✓</span> Row Level Security (RLS) による自動フィルタリング</li>
+            <li><span class="badge badge-success">✓</span> 役割ベースアクセス制御 (RBAC)</li>
+            <li><span class="badge badge-success">✓</span> AuthGate コンポーネントによる保護</li>
+        </ul>
+
+        <h3>11.2 データ保護</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> 組織間完全データ分離 (organization_id)</li>
+            <li><span class="badge badge-success">✓</span> SQL Injection 対策 (Supabase ORM)</li>
+            <li><span class="badge badge-success">✓</span> XSS 対策 (React のデフォルト保護)</li>
+            <li><span class="badge badge-success">✓</span> CSRF 対策 (JWT トークン検証)</li>
+        </ul>
+
+        <h3>11.3 API セキュリティ</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> Edge Functions での JWT 検証</li>
+            <li><span class="badge badge-success">✓</span> CORS ヘッダー設定</li>
+            <li><span class="badge badge-success">✓</span> Rate Limiting (使用量制限)</li>
+            <li><span class="badge badge-success">✓</span> 環境変数による秘密鍵管理</li>
+        </ul>
+
+        <h3>11.4 監査</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> 監査ログ記録 (audit_logs)</li>
+            <li><span class="badge badge-success">✓</span> 利用規約同意管理 (terms_acceptance)</li>
+            <li><span class="badge badge-success">✓</span> AI 使用量トラッキング</li>
+        </ul>
+
+        <h3>11.5 未実装・推奨対策</h3>
+        <ul>
+            <li><span class="badge badge-warning">⚠️</span> Two-Factor Authentication (2FA)</li>
+            <li><span class="badge badge-warning">⚠️</span> パスワード複雑度ポリシー</li>
+            <li><span class="badge badge-warning">⚠️</span> IP制限・Geo-Blocking</li>
+            <li><span class="badge badge-warning">⚠️</span> HTTPS 証明書 (デプロイ環境依存)</li>
+            <li><span class="badge badge-warning">⚠️</span> WAF (Web Application Firewall)</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="performance">12. パフォーマンス最適化</h2>
+
+        <h3>12.1 フロントエンド</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> コード分割 (react-vendor, chart-vendor, ui-vendor)</li>
+            <li><span class="badge badge-success">✓</span> Terser による圧縮・最適化</li>
+            <li><span class="badge badge-success">✓</span> Tree Shaking (Vite)</li>
+            <li><span class="badge badge-success">✓</span> CSS-in-JS 最適化 (Tailwind CSS)</li>
+        </ul>
+
+        <h3>12.2 データベース</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> インデックス作成 (organization_id, store_id, date等)</li>
+            <li><span class="badge badge-success">✓</span> 複合インデックス (パフォーマンス向上)</li>
+        </ul>
+
+        <h3>12.3 API</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> Edge Functions (低レイテンシ)</li>
+            <li><span class="badge badge-warning">⚠️</span> データキャッシング (React Query未使用 - 検討余地)</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="testing">13. テスト戦略 (未実装)</h2>
+
+        <h3>推奨テスト構成</h3>
+        <pre><code>tests/
+├── unit/                # ユニットテスト
+│   ├── utils/          # 計算ロジック
+│   ├── services/       # API呼び出し
+│   └── hooks/          # カスタムフック
+├── integration/         # 統合テスト
+│   └── api/            # Edge Functions
+├── e2e/                # E2Eテスト
+│   ├── auth.spec.ts    # 認証フロー
+│   ├── report.spec.ts  # 日報入力
+│   └── dashboard.spec.ts # ダッシュボード
+└── fixtures/            # テストデータ</code></pre>
+
+        <h3>推奨ツール</h3>
+        <ul>
+            <li><strong>ユニット/統合:</strong> Vitest</li>
+            <li><strong>E2E:</strong> Playwright / Cypress</li>
+            <li><strong>カバレッジ:</strong> Istanbul (c8)</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="roadmap">14. 今後の拡張計画</h2>
+
+        <h3>14.1 短期 (1-3ヶ月)</h3>
+        <ul>
+            <li>LINE Bot 実装 (日報のLINE入力)</li>
+            <li>モバイルアプリ (React Native / PWA)</li>
+            <li>リアルタイム通知機能</li>
+            <li>データエクスポート (CSV/Excel)</li>
+            <li>テスト実装 (Unit/E2E)</li>
+        </ul>
+
+        <h3>14.2 中期 (3-6ヶ月)</h3>
+        <ul>
+            <li>在庫管理機能</li>
+            <li>シフト管理機能</li>
+            <li>請求書管理</li>
+            <li>Stripe統合 (サブスクリプション決済)</li>
+            <li>多言語対応 (i18n)</li>
+        </ul>
+
+        <h3>14.3 長期 (6ヶ月以上)</h3>
+        <ul>
+            <li>予測分析 (AI売上予測)</li>
+            <li>複数組織切り替え機能</li>
+            <li>サードパーティ連携 (POS、会計ソフト等)</li>
+            <li>ホワイトラベル対応</li>
+            <li>オンプレミス版提供</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="troubleshooting">15. トラブルシューティング</h2>
+
+        <h3>よくある問題と解決策</h3>
+
+        <h4>1. 認証エラー: "Invalid token"</h4>
+        <p><strong>原因:</strong> JWT トークン期限切れ、または不正なトークン</p>
+        <p><strong>解決:</strong></p>
+        <pre><code>// 強制ログアウト → 再ログイン
+await supabase.auth.signOut()</code></pre>
+
+        <h4>2. RLS エラー: "new row violates row-level security policy"</h4>
+        <p><strong>原因:</strong> organization_id が NULL、または権限不足</p>
+        <p><strong>解決:</strong></p>
+        <pre><code>-- organization_id を自動設定するトリガー確認
+SELECT * FROM pg_trigger WHERE tgname LIKE '%org%';
+
+-- 手動設定
+UPDATE profiles SET organization_id = 'your-org-id' WHERE id = 'user-id';</code></pre>
+
+        <h4>3. Edge Function エラー: "Function not found"</h4>
+        <p><strong>原因:</strong> Edge Function が未デプロイ</p>
+        <p><strong>解決:</strong></p>
+        <pre><code>supabase functions deploy chat-gpt</code></pre>
+
+        <h4>4. データが表示されない</h4>
+        <p><strong>原因:</strong> デモモード/本番モード設定ミス</p>
+        <p><strong>解決:</strong></p>
+        <pre><code># .env ファイル確認
+VITE_USE_SUPABASE=true  # 本番データを使用
+VITE_USE_SUPABASE=false # モックデータを使用</code></pre>
+
+        <hr>
+
+        <h2 id="monitoring">16. 監視・メトリクス</h2>
+
+        <h3>推奨監視項目</h3>
+        <ol>
+            <li><strong>システム稼働率</strong> - Uptime (99.9% 目標)、レスポンスタイム (&lt;200ms)</li>
+            <li><strong>ユーザーメトリクス</strong> - DAU/MAU、セッション時間、離脱率</li>
+            <li><strong>ビジネスメトリクス</strong> - 日報入力率、AI使用率、レポート生成回数、サブスクリプション継続率</li>
+            <li><strong>エラー監視</strong> - エラー発生率、500エラー件数、認証失敗回数</li>
+        </ol>
+
+        <h3>推奨ツール</h3>
+        <ul>
+            <li><strong>Sentry</strong> - エラートラッキング</li>
+            <li><strong>Google Analytics / Mixpanel</strong> - ユーザー行動分析</li>
+            <li><strong>Supabase Dashboard</strong> - データベース監視</li>
+            <li><strong>Vercel/Netlify Analytics</strong> - デプロイ監視</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="license">17. ライセンス・利用規約</h2>
+
+        <h3>プロジェクトライセンス</h3>
+        <ul>
+            <li><strong>Private</strong> (非公開プロジェクト)</li>
+            <li>商用利用可能 (組織内)</li>
+        </ul>
+
+        <h3>使用ライブラリライセンス</h3>
+        <ul>
+            <li><strong>React, React Router:</strong> MIT License</li>
+            <li><strong>Supabase:</strong> Apache 2.0 License</li>
+            <li><strong>Tailwind CSS:</strong> MIT License</li>
+            <li><strong>Chart.js, Recharts:</strong> MIT License</li>
+            <li><strong>Radix UI:</strong> MIT License</li>
+            <li><strong>Lucide React:</strong> ISC License</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="contact">18. 連絡先・サポート</h2>
+
+        <h3>開発チーム</h3>
+        <ul>
+            <li><strong>プロジェクト管理者:</strong> (未設定)</li>
+            <li><strong>技術リード:</strong> (未設定)</li>
+        </ul>
+
+        <h3>サポートチャネル</h3>
+        <ul>
+            <li><strong>メール:</strong> support@example.com (未設定)</li>
+            <li><strong>Slack/Discord:</strong> (未設定)</li>
+            <li><strong>GitHub Issues:</strong> (未設定)</li>
+        </ul>
+
+        <h3>ドキュメント</h3>
+        <ul>
+            <li><strong>本ファイル:</strong> <code>SYSTEM_OVERVIEW.md</code></li>
+            <li><strong>マルチテナント設計:</strong> <code>MULTITENANT_ARCHITECTURE.md</code></li>
+            <li><strong>デプロイガイド:</strong> <code>PRODUCTION_DEPLOY.md</code></li>
+            <li><strong>API設定:</strong> <code>OPENAI_SETUP.md</code>, <code>GOOGLE_SHEETS_SETUP.md</code></li>
+        </ul>
+
+        <hr>
+
+        <h2 id="changelog">19. 変更履歴</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>日付</th>
+                    <th>バージョン</th>
+                    <th>変更内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2025-10-24</td>
+                    <td>1.0.0</td>
+                    <td>初版作成 - システム全体概要ドキュメント</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div class="info-box">
+            <p><strong>このドキュメントは、プロジェクト全体の理解と運用を支援するために作成されました。</strong></p>
+            <p><strong>質問・フィードバックは開発チームまでお願いします。</strong></p>
+        </div>
+
+        <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #e5e7eb; text-align: center; color: #6b7280;">
+            <p>AI Management System - システム全体概要ドキュメント v1.0.0</p>
+            <p>Generated: 2025-10-24</p>
+        </footer>
+    </div>
+</body>
+</html>
