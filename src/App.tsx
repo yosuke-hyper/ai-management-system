@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { MainLayout } from './layout/MainLayout'
-import { LoginForm } from './components/auth/LoginForm'
+import { LoginForm } from './components/Auth/LoginForm'
 import { DashboardDaily } from './pages/DashboardDaily'
 import { DashboardWeekly } from './pages/DashboardWeekly'
 import { DashboardMonthly } from './pages/DashboardMonthly'
