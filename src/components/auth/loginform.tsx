@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Mail, Lock, User, CircleAlert as AlertCircle, Building, Store, DollarSign } from 'lucide-react'
+import { Mail, Lock, User, CircleAlert as AlertCircle, Building, Store, DollarSign, UtensilsCrossed } from 'lucide-react'
 import { useAuth } from '@/contexts/authcontext'
 // Note: 新料金体系ではプラン選択が必要です。後で実装予定
 
@@ -123,14 +123,20 @@ export const LoginForm: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-4">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="space-y-1 pb-6">
-          <div className="flex justify-center mb-4">
-            <img
-              src="/src/assets/FoodValue AI Logo - Professional and Inviting (4).png"
-              alt="FoodValue AI Logo"
-              className="h-40 w-auto"
-            />
+          <div className="flex flex-col items-center justify-center mb-4 py-6">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg">
+                <UtensilsCrossed className="h-10 w-10 text-white" strokeWidth={2.5} />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
+                  FoodValue AI
+                </h1>
+                <p className="text-sm text-emerald-600 font-medium">飲食店経営分析システム</p>
+              </div>
+            </div>
           </div>
-          <p className="text-center text-slate-600 text-sm mt-2">
+          <p className="text-center text-slate-600 text-sm">
             {isSignUp ? '新規アカウント登録' : 'ログイン'}
           </p>
         </CardHeader>
