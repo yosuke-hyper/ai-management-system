@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Error notification animations */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+@layer base {
+  :root {
+    --background: 37 50% 98%;
+    --foreground: 220 13% 30%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 30%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 30%;
+    --primary: 18 94% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 37 50% 95%;
+    --secondary-foreground: 220 13% 30%;
+    --muted: 37 50% 95%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 37 80% 90%;
+    --accent-foreground: 18 94% 48%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 37 30% 88%;
+    --input: 37 30% 88%;
+    --ring: 18 94% 48%;
+    --radius: 1.5rem;
+    
+    /* Semantic colors */
+    --success: 142 72% 40%;
+    --warning: 38 92% 50%;
+    --info: 217 91% 60%;
+    --danger: 0 84% 60%;
+    
+    /* Chart color palette */
+    --chart-1: 221 83% 53%;
+    --chart-2: 142 72% 40%;
+    --chart-3: 271 91% 65%;
+    --chart-4: 14 90% 57%;
+    --chart-5: 199 89% 48%;
+    --chart-6: 50 97% 63%;
+    --chart-7: 339 90% 55%;
+    --chart-8: 192 19% 40%;
+    /* Semantic colors */
+    --success: 142 72% 40%;
+    --warning: 38 92% 50%;
+    --info: 217 91% 60%;
+    --danger: 0 84% 60%;
+    
+    /* Chart color palette */
+    --chart-1: 221 83% 53%;
+    --chart-2: 142 72% 40%;
+    --chart-3: 271 91% 65%;
+    --chart-4: 14 90% 57%;
+    --chart-5: 199 89% 48%;
+    --chart-6: 50 97% 63%;
+    --chart-7: 339 90% 55%;
+    --chart-8: 192 19% 40%;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+    
+    /* Semantic colors */
+    --success: 142 70% 45%;
+    --warning: 38 92% 60%;
+    --info: 217 91% 70%;
+    --danger: 0 84% 66%;
+    
+    /* Chart color palette */
+    --chart-1: 221 83% 60%;
+    --chart-2: 142 72% 46%;
+    --chart-3: 271 91% 70%;
+    --chart-4: 14 90% 64%;
+    --chart-5: 199 89% 56%;
+    --chart-6: 50 97% 70%;
+    --chart-7: 339 90% 62%;
+    --chart-8: 192 19% 50%;
+    /* Semantic colors */
+    --success: 142 70% 45%;
+    --warning: 38 92% 60%;
+    --info: 217 91% 70%;
+    --danger: 0 84% 66%;
+    
+    /* Chart color palette */
+    --chart-1: 221 83% 60%;
+    --chart-2: 142 72% 46%;
+    --chart-3: 271 91% 70%;
+    --chart-4: 14 90% 64%;
+    --chart-5: 199 89% 56%;
+    --chart-6: 50 97% 70%;
+    --chart-7: 339 90% 62%;
+    --chart-8: 192 19% 50%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    font-size: 112.5%;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Subtle pulse animation for attention-grabbing elements */
+@keyframes subtle-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(251, 146, 60, 0);
+  }
+  50% {
+    box-shadow: 0 0 8px 2px rgba(251, 146, 60, 0.3);
+  }
+}
+
+.animate-subtle-pulse {
+  animation: subtle-pulse 2.5s ease-in-out infinite;
+}
