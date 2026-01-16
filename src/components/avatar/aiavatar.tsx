@@ -296,16 +296,16 @@ export function AiAvatar({ mood, emotion, size = 120, className = '', fixed = tr
         `}
       </style>
       <div
-        className={`${fixed ? 'fixed bottom-6 right-6 z-50' : ''} ${className}`}
+        className={`${fixed ? 'fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50' : ''} ${className}`}
         style={fixed && draggable ? {
           transform: `translate(${position.x}px, ${position.y}px)`,
           transition: isDragging ? 'none' : 'transform 0.3s ease-out',
         } : undefined}
       >
         {displayMessage && !showHelpChat && (
-          <div className="speech-bubble absolute bottom-full right-0 mb-2 max-w-[200px] bg-white border-2 border-blue-500 rounded-lg px-3 py-2 shadow-lg">
-            <div className="text-sm font-medium text-blue-900">{displayMessage}</div>
-            <div className="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-3 h-3 bg-white border-r-2 border-b-2 border-blue-500"></div>
+          <div className="speech-bubble absolute bottom-full right-0 mb-2 max-w-[160px] md:max-w-[200px] bg-white border-2 border-blue-500 rounded-lg px-2 py-1.5 md:px-3 md:py-2 shadow-lg">
+            <div className="text-xs md:text-sm font-medium text-blue-900">{displayMessage}</div>
+            <div className="absolute bottom-0 right-4 md:right-6 transform translate-y-1/2 rotate-45 w-3 h-3 bg-white border-r-2 border-b-2 border-blue-500"></div>
           </div>
         )}
 
@@ -319,11 +319,11 @@ export function AiAvatar({ mood, emotion, size = 120, className = '', fixed = tr
               setShowHelpChat(true);
               onHelpChatToggle?.(true);
             }}
-            className="absolute -top-3 -left-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 shadow-lg transition-all hover:scale-110 z-10"
+            className="absolute -top-2 -left-2 md:-top-3 md:-left-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-1.5 md:p-2 shadow-lg transition-all hover:scale-110 z-10"
             aria-label="ヘルプチャットを開く"
             title="ダブルクリックまたは長押しでもヘルプを開けます"
           >
-            <HelpCircle className="w-4 h-4" />
+            <HelpCircle className="w-3 h-3 md:w-4 md:h-4" />
           </button>
         )}
 
@@ -333,22 +333,22 @@ export function AiAvatar({ mood, emotion, size = 120, className = '', fixed = tr
               e.stopPropagation();
               onCustomize();
             }}
-            className="absolute -top-3 -right-3 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white rounded-full p-2 shadow-lg transition-all hover:scale-110 z-10"
+            className="absolute -top-2 -right-2 md:-top-3 md:-right-3 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white rounded-full p-1.5 md:p-2 shadow-lg transition-all hover:scale-110 z-10"
             aria-label="アバターをカスタマイズ"
             title="着せ替え"
           >
-            <Home className="w-4 h-4" />
+            <Home className="w-3 h-3 md:w-4 md:h-4" />
           </button>
         )}
 
         {fixed && draggable && !isDefaultPosition && !showHelpChat && (
           <button
             onClick={handleResetPosition}
-            className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-gray-600 hover:bg-gray-700 text-white rounded-full p-1.5 shadow-lg transition-all hover:scale-110 z-10"
+            className="absolute -bottom-2 md:-bottom-3 left-1/2 -translate-x-1/2 bg-gray-600 hover:bg-gray-700 text-white rounded-full p-1 md:p-1.5 shadow-lg transition-all hover:scale-110 z-10"
             aria-label="位置をリセット"
             title="元の位置に戻す"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3 h-3 md:w-3.5 md:h-3.5" />
           </button>
         )}
 
@@ -359,10 +359,9 @@ export function AiAvatar({ mood, emotion, size = 120, className = '', fixed = tr
             ${fixed && draggable ? 'ai-avatar-draggable' : ''}
             ${isDragging ? 'ai-avatar-dragging' : ''}
             relative transition-all
+            w-20 h-20 md:w-[120px] md:h-[120px]
           `}
           style={{
-            width: size,
-            height: size,
             aspectRatio: '1/1'
           }}
           onClick={handleClick}
